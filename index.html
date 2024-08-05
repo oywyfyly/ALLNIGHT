@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 20%;
+            background-color: rgb(40, 40, 50);
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+        li a {
+            display: block;
+            color: #aaa;
+            padding: 10px 40px;
+            text-decoration: none;
+        }
+
+        li a.active {
+            background-color: rgb(32, 32, 42);
+            color: white;
+        }
+
+        li a:hover:not(.active) {
+            background-color: rgb(32, 32, 42);
+            color: white;
+        }
+
+        .home-heading {
+            display: flex;
+            align-items: center;
+            width: 100vw;
+            height: 5vw;
+            background-color: rgb(40, 40, 50);
+        }
+ 
+        .loginbutton {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4caf50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-left: 0px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+            /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        /* Modal content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .content-section {
+            margin-left: 20%;
+            padding: 0px;
+        }
+    </style>
+</head>
+  
+<body>
+    <div class="home-heading">
+        <h1 style="margin-left: 50px;">ALL NIGHT</h1>
+        <button id="login_btn" class="loginbutton" style="height: fit-content; margin-left: 70vw;">Login</button>
+    </div>
+    
+    <!-- The Modal -->
+    <div id="loginModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form>
+                <div class="form-group">
+                    <label for="fullname">Full name</label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("loginModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("login_btn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <ul>
+        <li><a class="active" id="nav-home">Home</a></li>
+        <li><a id="nav-progress">Progress</a></li>
+        <li><a id="nav-leaderboard">Leaderboard</a></li>
+        <li><a id="nav-activity">Activity</a></li>
+        <li><a id="nav-socials">Socials</a></li>
+        <li><a id="nav-chat">Chat</a></li>
+    </ul>
+
+    <div class="content-section" id="content-section">
+        <div id="content-area"></div>
+    </div>
+
+    <script>
+        function loadContent(contentUrl) {
+            fetch(contentUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById("content-area").innerHTML = data;
+                })
+                .catch(error => console.error('Error loading content:', error));
+        }
+
+        function setActiveNav(id) {
+            document.querySelectorAll('ul li a').forEach(a => {
+                a.classList.remove('active');
+            });
+            document.getElementById(id).classList.add('active');
+        }
+
+        document.getElementById("nav-progress").addEventListener("click", function(event) {
+            event.preventDefault();
+            loadContent("progress.html");
+            setActiveNav("nav-progress");
+        });
+
+        document.getElementById("nav-leaderboard").addEventListener("click", function(event) {
+            event.preventDefault();
+            loadContent("leaderboard.html");
+            setActiveNav("nav-leaderboard");
+        });
+
+        document.getElementById("nav-activity").addEventListener("click", function(event) {
+            event.preventDefault();
+            loadContent("activity.html");
+            setActiveNav("nav-activity");
+        });
+
+        document.getElementById("nav-socials").addEventListener("click", function(event) {
+            event.preventDefault();
+            loadContent("socials.html");
+            setActiveNav("nav-socials");
+        });
+
+        document.getElementById("nav-chat").addEventListener("click", function(event) {
+            event.preventDefault();
+            loadContent("chat.html");
+            setActiveNav("nav-chat");
+        });
+    </script>
+  
+</body>
+</html>

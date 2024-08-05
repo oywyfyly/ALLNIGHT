@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space_around;
+        align-items: center;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        }
+    
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        padding: 0px;
+    }
+    
+    .column {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        width: 500px;
+        margin: 10px;
+    }
+
+    .column img {
+        width: 500px;
+        height: 500px;
+    }
+    
+    .route {
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            border-radius: 100px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .route.selected {
+            border: 2px solid #FFFFFF;
+        }
+        .route.completed {
+            filter: brightness(0.6);
+        }
+        .yellow { background-color: #ffeb3b; }
+        .blue { background-color: #2196f3; color: white; }
+        .purple { background-color: #9c27b0; color: white; }
+        .green { background-color: #4caf50; color: white; }
+        .orange { background-color: #ff9800; color: white; }
+        .red { background-color: #f44336; color: white; }
+        .black { background-color: #212121; color: white; }
+        .white { background-color: #ffffff; border: 1px solid #ccc; }
+        button {
+            padding: 10px 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            background-color: #4caf50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+</style>
+</head>
+  
+<body>
+    <h1>Graceland</h1>
+    <p>Browse Sets</p>
+    
+    <div class="container">
+        <div class="column">
+            <img src="graceland_mid.jpg" alt="graceland_mid">
+            <div class="routes">
+                <div class="route black" onclick="selectRoute(this, 'graceland_mid_black')">Black</div>
+                <div class="route white" onclick="selectRoute(this, 'graceland_mid_white')">White</div>
+                <div class="route red" onclick="selectRoute(this, 'graceland_mid_red')">Red</div>
+                <div class="route orange" onclick="selectRoute(this, 'graceland_mid_orange')">Orange</div>
+            </div>
+        </div>
+    
+        <div class="column">
+            <img src="graceland_end.jpg" alt="graceland_end">
+                <div class="routes">
+                    <div class="route red" onclick="selectRoute(this, 'graceland_end_red')">Red</div>
+                    <div class="route orange" onclick="selectRoute(this, 'graceland_end_orange')">Orange</div>
+                    <div class="route green" onclick="selectRoute(this, 'graceland_end_green')">Green</div>
+                    <div class="route black" onclick="selectRoute(this, 'graceland_end_black')">Black</div>
+                </div>
+            </div>
+        </div>
+        
+    <button onclick="submitRoutes()">Submit</button>
+
+    <script>
+        function selectRoute(element, routeName) {
+            element.classList.toggle('selected');
+        }
+
+        function submitRoutes() {
+            const routes = document.querySelectorAll('.route');
+            routes.forEach(route => {
+                if (route.classList.contains('selected')) {
+                    route.classList.toggle('completed');
+                    route.classList.remove('selected');
+                }
+            });
+        }
+    </script>
+    
+</body>
+</html>

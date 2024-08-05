@@ -1,0 +1,10 @@
+
+body {
+  overflow-x: hidden;
+  background-color: rgb(50, 50, 60);
+  font-family: "calibri", sans-serif;
+}
+
+h1, h2, p {
+  color: #aaa;
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <style>
+        .overview-banner {
+          display: flex;
+          width: 100vw;
+          height: 7vw;
+          background-color: rgb(50, 50, 60);
+        }
+
+        .block {
+          width: 10px;
+          height: 10px;
+          margin: 5px;
+          border-radius: 2px;
+        }
+        .block1 { background-color: yellow; }
+        .block2 { background-color: blue; }
+        .block3 { background-color: purple; }
+        .block4 { background-color: green; }
+        .block5 { background-color: orange; }
+        .block6 { background-color: red; }
+        .block7 { background-color: black; }
+        .block8 { background-color: white; }
+
+        .blocks {
+          display: flex;
+          margin-top: 10px;
+        }
+
+        .log-panel{
+            margin-left: 50px;
+            background-color: rgb(60, 60, 70);
+            width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overview-banner">
+        <div style="margin: 10px 50px;">
+            <h2 style="margin: 5px">Name</h2>
+            <p style="margin: 5px">#3 | 400pts</p>
+            
+            <div class="blocks">
+                <div class="block block1"></div>
+                <div class="block block2"></div>
+                <div class="block block3"></div>
+                <div class="block block4"></div>
+                <div class="block block5"></div>
+                <div class="block block6"></div>
+                <div class="block block7"></div>
+                <div class="block block8"></div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+<div style="margin: 50px;">
+  <button id="nav-latte" type="button">Latte</button>
+  <button id="nav-jawa" type="button">Jawa</button>
+  <button id="nav-graceland" type="button">Graceland</button>
+  <button id="nav-atelier" type="button">Atelier</button>
+  <button id="nav-stronarch" type="button">Stronarch</button>
+  <button id="nav-burrow" type="button">Burrow</button>
+  <button id="nav-garage" type="button">Garage</button>
+</div>
+
+<!-- Container to load content -->
+<div id="content-container2"></div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      // Function to load content
+      function loadContent(file) {
+          fetch(file)
+              .then(response => response.text())
+              .then(data => {
+                  document.getElementById("content-container2").innerHTML = data;
+              })
+              .catch(error => {
+                  console.error('Error fetching content:', error);
+              });
+      }
+
+      // Add event listeners to buttons
+      document.getElementById("nav-latte").addEventListener("click", function() {
+          loadContent("latte.html");
+      });
+
+      document.getElementById("nav-jawa").addEventListener("click", function() {
+          loadContent("jawa.html");
+      });
+
+      document.getElementById("nav-graceland").addEventListener("click", function() {
+          loadContent("graceland.html");
+      });
+
+      document.getElementById("nav-atelier").addEventListener("click", function() {
+          loadContent("atelier.html");
+      });
+
+      document.getElementById("nav-stronarch").addEventListener("click", function() {
+          loadContent("stronarch.html");
+      });
+
+      document.getElementById("nav-burrow").addEventListener("click", function() {
+          loadContent("burrow.html");
+      });
+
+      document.getElementById("nav-garage").addEventListener("click", function() {
+          loadContent("garage.html");
+      });
+  });
+</script>
+
+</body>
+</html>
